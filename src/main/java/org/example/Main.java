@@ -33,7 +33,13 @@ public class Main {
                 System.out.print("내용 : ");
                 String body = sc.nextLine().trim();
 
-                //DB 연동
+                Article article = new Article(id, title, body);
+
+                lastArticleId++;
+                System.out.println(article);
+                System.out.println(id + "번 글이 작성되었습니다");
+
+                /// //////////////////////////////////////////////
                 Connection conn = null;
                 PreparedStatement pstmt = null;
 
@@ -46,16 +52,15 @@ public class Main {
                     String sql = "INSERT INTO article";
                     sql += " SET regDate = NOW(),";
                     sql += "updateDate = NOW(),";
-                    sql += "title =  title";
-                    sql += "`body` =  body";
+                    sql += "title = '" + title + "',";
+                    sql += "`body` = '" + body + "';";
 
                     System.out.println(sql);
 
                     pstmt = conn.prepareStatement(sql);
-                    pstmt.setString(1, title);
-                    pstmt.setString(2, body);
 
-                    int affectedRow =  pstmt.executeUpdate();
+                    int affectedRow = pstmt.executeUpdate();
+
                     System.out.println("affectedRow = " + affectedRow);
 
                 } catch (ClassNotFoundException e) {
@@ -78,12 +83,6 @@ public class Main {
                         e.printStackTrace();
                     }
                 }
-
-                Article article = new Article(id, title, body);
-                articles.add(article);
-
-                lastArticleId++;
-                System.out.println(article);
             } else if (cmd.equals("article list")) {
                 System.out.println("==목록==");
                 if (articles.size() == 0) {
