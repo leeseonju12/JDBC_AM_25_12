@@ -1,4 +1,4 @@
-package org.example.Util;
+package org.example.util;
 
 
 import org.example.exception.SQLErrorException;
