@@ -1,6 +1,6 @@
 package org.example.Test;
 
-import org.example.Article;
+import org.example.dto.Article;
 
 import java.sql.*;
 import java.util.ArrayList;
